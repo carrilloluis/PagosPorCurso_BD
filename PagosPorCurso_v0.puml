@@ -1,0 +1,40 @@
+@startuml ppc1
+	skin rose
+	hide circle
+	hide empty members
+
+	entity Tarifario {
+		*id : UUID
+		descripción : VARCHAR
+		monto : NUMERIC
+	}
+	entity Curso {
+		*id : UUID
+		denominación : VARCHAR
+		descripción : TEXT
+		día_inicio : DATE
+	}
+	entity Alumno {
+		*id : UUID
+		nombres : VARCHAR
+		apellidos : VARCHAR
+	}
+	entity Matrícula {
+		*id : INTEGER
+		id_curso : UUID
+		id_alumno : UUID
+		id_tarifa : UUID
+		número_cuotas : INTEGER
+	}
+	entity RegistroPagos {
+		*id : INTEGER
+		id_matrícula : INTEGER
+		monto_abonado : NUMERIC
+		número_cuota : INTEGER
+		fecha_vencimiento : DATE
+	}
+	Curso ||--o{ Matrícula
+	Alumno ||--o{ Matrícula
+	Tarifario ||--o{ Matrícula
+	Matrícula ||-d-o{ RegistroPagos
+@enduml
